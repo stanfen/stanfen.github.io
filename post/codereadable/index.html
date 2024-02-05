@@ -1,0 +1,376 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>代码质量自我提升 | Gridea</title>
+<link rel="shortcut icon" href="https://stanfen.github.io/favicon.ico?v=1707131669085">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stanfen.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="代码质量自我提升 | Gridea - Atom Feed" href="https://stanfen.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+[写在开始]这篇内容对90%以上的公司不需要。因此它会给公司带来显著的效益、不会给个人带来本质的进步。它只是程序猿自我意识满足和提升的自我成就感。对以程序为生的人而言，他们面对更多的是满满的焦虑和数不尽的遗留问题。
+
+
+最近花时间整理：我..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://stanfen.github.io">
+  <img class="avatar" src="https://stanfen.github.io/images/avatar.png?v=1707131669085" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/more" class="menu">
+          more
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              代码质量自我提升
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-07-30
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <blockquote>
+<p>[写在开始]这篇内容对90%以上的公司不需要。因此它会给公司带来显著的效益、不会给个人带来本质的进步。它只是程序猿自我意识满足和提升的自我成就感。对以程序为生的人而言，他们面对更多的是满满的焦虑和数不尽的遗留问题。</p>
+</blockquote>
+<!-- more -->
+<p>最近花时间整理：我对代码的<em>可读性</em>和<em>可测试性</em>理解。一个深陷老旧系统无法脱身程序员的苦闷。总体而言，代码质量问题不是团队、项目、公司面临的问题，只属于程序猿。而对代码质量提升又没有统一标准，在不可能完成的任务：说服程序猿修改自己代码、认为代码质量不高，一定忝列其中。</p>
+<p>这篇文章分为2部分：代码可读性和代码可测试性。</p>
+<p>可读性和可测试是没有统一的量化标准，一切标准都有纲领。本文指导性纲领：最为我们熟知的是<em>SOLID, KISS, DRY ...</em>。内容是它们的具体化。</p>
+<hr>
+<p>1、注释可读性原则<br>
+人是会遗忘的动物，注释是提醒读者关于代码的点滴。<br>
+代码是用来维护和阅读的文档，代码是功能最直接的传达者。而注释为何要如此传达的解释。<br>
+一些开发模式摒弃注释本身就不利于代码可读性和可维护性。</p>
+<ul>
+<li>注释内容<br>
+文档描述为什么code，而不是code是什么。最好描述代码功能描述是：代码实现,而不是字面的描述。</li>
+<li>注释变化<br>
+保持文档持续更新，使之与当前实现匹配。不匹配的文档非但不是理解code的助推器，反而是阻燃剂。</li>
+<li>不要添加无意义的注释
+<ul>
+<li>不增加的关于调试信息描述</li>
+</ul>
+</li>
+</ul>
+<pre><code> getUTCTime()// debug：获取UTC 用于记录耗时 
+</code></pre>
+<pre><code>- 不要无意义的注释
+</code></pre>
+<pre><code>  new Date() // 生成Date 信息
+</code></pre>
+<p>以上反例是要说明能用代码解决的就不要加注释。</p>
+<ul>
+<li>注释跟踪<br>
+注释跟踪：记录代码注释历史。既为了追溯，也便于阅读者和修改方进行信息传递。</li>
+</ul>
+<p>2、通用可读性原则<br>
+通用原则指对变量、方法、以及类都适用的原则。</p>
+<ul>
+<li>
+<p>格式规范化<br>
+项目需要规范化代码格式化内容。诸如 空格缩进、方式修饰符使用、｛｝、if ...else.. 等控制关键字使用、驼峰式命名或者匈牙利命名等。规划化的格式才是代码可读性的基础。</p>
+</li>
+<li>
+<p>命名规范化</p>
+<ul>
+<li>英文使用规划化<br>
+比如：修复对应的英文, 包括repair fix ...。如何选择合适的词汇来描述。尽量使用软件行业专用词汇，对老旧系统即使无法统一，也不要出现相同术语而使用不同的词汇。</li>
+<li>不要在命名中嵌入数据类型尤其是函数中</li>
+</ul>
+<pre><code>//功能是把日期转换成Int，这是不建议的方式，*函数的返回类型*标识的Int
+//函数中加入类型是画蛇添足
+.... //伪代码
+  getDate2Int() 
+</code></pre>
+</li>
+<li>
+<p>好的框架<br>
+为避免重复造轮子，需要好的框架。拥抱开源。在每个领域都有优秀的开关框架。如数据库连接池管理库Druid HikariCP DBCP...，线程池管理框架、支持缓存的Redis，CacheMem。优秀的框架即战力很强大，我们都值得拥有。</p>
+</li>
+<li>
+<p>避免重复的代码<br>
+坚持DRY（don't repeat yourself.）原则一百年不动摇。</p>
+</li>
+<li>
+<p>代码模块化<br>
+模块化没有直接受益，我只能说对可读性而言太重要。模块化和组件化设计意味着最小知识、技能和依赖在系统中，防止教条出现、构建抽象层、避免设计复杂的相互依赖、功能独立性等....</p>
+</li>
+<li>
+<p><strong>代码review原则</strong><br>
+让review真正运作起来，而不是形式化。review代码是检验可读性最佳标准。信息沟通是提升编码水平和形成习惯的最佳途径。</p>
+</li>
+<li>
+<p><strong>给代码以时间</strong><br>
+套用大刘的那句话。试想几个月甚至更久后，我们回看代码，若逻辑不清晰、结构待调整，说明代码可读性有提升空间。一切交给时间吧。</p>
+</li>
+</ul>
+<p>2、函数可读性原则</p>
+<ul>
+<li>函数简短化<br>
+受过长函数苦的，就不要让其它人继续受苦了。我们不武断提倡每个函数少于5行，但绝不让它们超过 50行。</li>
+<li>参数列表简短化<br>
+限制参数的长度， 3~5个为宜。过长的参数列表，往往意味这超长的函数和复杂代码逻辑。</li>
+<li>参数最小化原则<br>
+遵守参数最小化原则，即不需要的参数不用传入。参数没有最小化，是代码腐化的主要原因。</li>
+</ul>
+<pre><code>calss Person(name: String, addr: String, age: Int， sex: String）
+def isFemale(person: Person)： Boolean = {
+    ....
+}
+</code></pre>
+<p>上例中判断是否是用女性，只用传入sex就满足功能要求，传入的参数是Person 违背参数最小化原则。</p>
+<ul>
+<li>代码执行逻辑统一<br>
+我们曾功能实现时，过程控制条件太多，且没有统一逻辑。代码经常看到if ...else...满天飞，但细读下来各个分支逻辑并不同。如下正例：都是根据小时条件生成结果。反例则可读性不高。</li>
+</ul>
+<pre><code> string GetTimeOfDay()
+{
+    DateTime time = DateTime.Now;
+    if (time.Hour &gt;= 0 &amp;&amp; time.Hour &lt; 6)
+    {
+        return &quot;Night&quot;;
+    }
+    if (time.Hour &gt;= 6 &amp;&amp; time.Hour &lt; 12)
+    {
+        return &quot;Morning&quot;;
+    }
+   ....
+    return &quot;Evening&quot;;
+}
+//反例
+if (lineItem != null &amp;&amp; (lineItem.quantity &gt; 0 &amp;&amp; customer.isActive() &amp;&amp; (card.expirityYear &gt; 2010 || card.type == AMX)) || couponCode.isValid()) {
+// details..
+}
+</code></pre>
+<ul>
+<li>代码有效性
+<ul>
+<li>义无反顾的删除过期代码和调试代码。</li>
+<li>减少无用日志输出。让代码有意义</li>
+</ul>
+</li>
+<li>单一职责<br>
+就是我们常说的SRP。就函数而言，保证以上原则SRP满足了。<br>
+3、类可读性原则</li>
+<li>数据类和实现类分离<br>
+数据的提供者和使用者分离。避免类中存储数据，外部数据在类生成时传入，类只负责对数据的操作。</li>
+<li>不同类提供不同接口<br>
+如果内部相似的类，对外却提供不同的接口，让其接口统一：创建接口层，etc.保持内外提供相同接口。</li>
+<li>简化初始化逻辑<br>
+面向对象编程，多重继承让类初始化逻辑异常复杂。为了简化逻辑，类初始化逻辑耦合尽量小。</li>
+<li>减少类接口暴露数量<br>
+是时候使用访问级别修饰符限定访问权限，和简化对外接口。</li>
+<li>明确函数归属原则<br>
+若函数实现依赖其它类，那么它属于依赖函数，而不是当前类。</li>
+<li>隔离依赖<br>
+依赖的库如无法进行修改，为了便于使用新的库，构造接口类进行隔离。</li>
+<li>废弃任何不必须类<br>
+任何类都会增加项目的复杂度，多余功能类进行废弃和合并</li>
+<li>重构类<br>
+如果一个类修改，同时要修改若干其它类，对该类进行进行重构。保证修改仅限在一个类中。</li>
+</ul>
+<hr>
+<p>代码可测试性规则</p>
+<blockquote>
+<p>前言 引用</p>
+</blockquote>
+<p>在不同领域软件测试分类不尽相同。粗略来分是：单元测试和系统测试。单元测试如同金字塔的根基，它的好坏直接决定软件质量和研发效率。爱因斯坦这样说过:</p>
+<blockquote>
+<p>Only two things are infinite - the universe and human stupidity, and I'm not so sure about the universe. -- Albert Einstein<br>
+因此，编写用例覆盖代码是必须的。那么，如何让代码具备良好的可测试性哪？不是用例难写，而是代码不可测试让用例难写。下文列出一些原则与你共飨。<br>
+代码可读性和可测试在存在重复环节，也有不少不同。文中内容只是个人经验总结和习惯，希望对你有益。</p>
+</blockquote>
+<ul>
+<li>好的框架， 统一描述语言<br>
+每个语言都有一些测试框架，提供了语法糖和特性，拿来即用。测试框架就像语言，让我们用统一的语言沟通，测试用例也会规范化。</li>
+<li>持续性测试<br>
+用例覆盖软件代码，持续进行改进。用例是开发的一部分。</li>
+<li>合理使用设计模式<br>
+设计模式点亮世界。滥用模式让软件重新走进黑暗。不能因为模式而模式，设计要适可而止。</li>
+<li>减少链式调用</li>
+</ul>
+<pre><code>object.message(); // 正常调用
+object.someOtherObject.someService.getMeSomeInfo(); // 多级调用 **反例**
+</code></pre>
+<p>反例中代码容易理解，可读性较高。但可测试性上，却大打折扣。每一级调用是否幂等都存在未知数。非系统函数调用禁止这样编写代码。从这点上看，代码可读性和可测试性不完全统一。即可读性并不意味着易于测试。</p>
+<ul>
+<li>隐藏依赖</li>
+</ul>
+<p>减少外部依赖，尤其依赖外部库时，我们要进行依赖隔离。</p>
+<pre><code> string GetTimeOfDay()
+{
+    DateTime time = DateTime.Now; // ** 引入依赖 **
+    if (time.Hour &gt;= 0 &amp;&amp; time.Hour &lt; 6)
+    {
+        return &quot;Night&quot;;
+    }
+    if (time.Hour &gt;= 6 &amp;&amp; time.Hour &lt; 12)
+    {
+        return &quot;Morning&quot;;
+    }
+   ....
+    return &quot;Evening&quot;;
+}
+</code></pre>
+<p>函数<em>GetTimeOfDay</em>功能单一，可读性很强。但是结果依赖 <em>DateTime.Now;</em>，调用函数结果无法确定，很难编写稳定的单元测试，可测试性很差。修改方法如下：</p>
+<pre><code>string GetTimeOfDay(DateTime time)
+{
+//隐藏依赖，作为参数进行传递
+   // DateTime time = DateTime.Now; 
+  ....
+}
+</code></pre>
+<ul>
+<li>
+<p>避免静态属性和字段调用</p>
+<pre><code>if (Mode.isDefaultMode) { gpPoolController.Connection(); }
+</code></pre>
+</li>
+</ul>
+<p>反例引用静态字段，隐藏字段是否存在外部修改的可能性。</p>
+<ul>
+<li>
+<p>不要过多使用线程</p>
+<p>线程间数据共享不仅是软件开发面对的难题，测试也面临相同的困境。</p>
+</li>
+<li>
+<p>不可变对象（变量和类）是头等公民</p>
+<p>不解释</p>
+</li>
+<li>
+<p>保证独立性</p>
+<p>独立性表现在减少外部依赖，又要减少功能的依赖。可测试性困局根本原因是没有意识到独立性重要性。</p>
+</li>
+<li>
+<p>减少频繁重构</p>
+<p>代码可读性是不断迭代出来的，而这种重构对代码可测性维护带来额外的负担。</p>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://stanfen.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
